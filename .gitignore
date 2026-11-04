@@ -28,5 +28,4 @@ electron-builder.dist.json
 docs/agent-platform/
 docs/软著/
 .cursor/
-.vscode/
 
