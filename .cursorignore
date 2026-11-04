@@ -1,0 +1,5 @@
+﻿release/
+ui/dist/
+node_modules/
+ui/node_modules/
+.vendor/

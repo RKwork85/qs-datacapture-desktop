@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="32" height="32">
+  <defs>
+    <radialGradient id="ctrlGlowShadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ctrlTopFace" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+    <linearGradient id="ctrlLeftFace" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+    <linearGradient id="ctrlRightFace" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <filter id="ctrlCoreGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="ctrlFloorBlur" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+  </defs>
+
+  <ellipse cx="50" cy="85" rx="35" ry="12" fill="url(#ctrlGlowShadow)"/>
+  <ellipse cx="50" cy="80" rx="25" ry="8" fill="#06b6d4" opacity="0.2" filter="url(#ctrlFloorBlur)"/>
+
+  <g>
+    <path d="M 50 75 L 20 58 L 20 32 L 50 50 Z" fill="url(#ctrlLeftFace)"/>
+    <path d="M 50 75 L 80 58 L 80 32 L 50 50 Z" fill="url(#ctrlRightFace)"/>
+    <path d="M 50 50 L 20 32 L 50 15 L 80 32 Z" fill="url(#ctrlTopFace)"/>
+    <path d="M 50 50 L 20 32" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+  </g>
+
+  <g filter="url(#ctrlCoreGlow)">
+    <ellipse cx="50" cy="45" rx="16" ry="6" fill="none" stroke="#ffffff" stroke-width="2.5" transform="rotate(-15 50 45)" opacity="0.9"/>
+    <ellipse cx="50" cy="45" rx="6" ry="16" fill="none" stroke="#ffffff" stroke-width="2.5" transform="rotate(-15 50 45)" opacity="0.9"/>
+    <circle cx="50" cy="45" r="5" fill="#ffffff"/>
+    <circle cx="63" cy="41" r="2.5" fill="#22d3ee"/>
+    <circle cx="37" cy="49" r="2.5" fill="#8b5cf6"/>
+  </g>
+
+  <path d="M 42 65 L 42 72 C 42 75, 58 75, 58 72 L 58 65" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+</svg>

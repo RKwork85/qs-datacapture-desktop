@@ -1,0 +1,93 @@
+/**
+ * QS DataCapture — Design Tokens
+ * 视觉目标：清透蓝白、有活力、克制（Linear / 现代 SaaS）
+ * 组件内禁止写死 hex，一律引用这些变量。
+ */
+
+:root {
+  /* —— Color: Light（默认） —— */
+  --bg-base: #f5f8ff; /* 页面底：极浅蓝灰 */
+  --bg-elevated: #ffffff; /* 卡片/顶栏/浮层：纯白 */
+  --bg-subtle: #eef3fc; /* 次级底：侧栏底、斑马纹、输入底 */
+  --bg-console: #f8faff; /* 底栏日志：与主区分层 */
+  --border: #e3e8f0; /* 细边框：带蓝味浅灰 */
+  --border-strong: #cbd5e1; /* 强调分隔 */
+
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+
+  --accent: #2563eb; /* 品牌主蓝 */
+  --accent-hover: #1d4ed8;
+  --accent-foreground: #ffffff;
+  --accent-soft: #dbeafe; /* 选中浅蓝底（加深一档，更有活力） */
+
+  --success: #16a34a;
+  --success-soft: #dcfce7;
+  --warning: #f59e0b;
+  --warning-soft: #fef3c7;
+  --danger: #ef4444;
+  --danger-soft: #fee2e2;
+
+  /* —— Spacing: 4px 栅格 —— */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 40px;
+  --space-8: 48px;
+
+  /* —— Radius —— */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  /* —— Shadow：浅色最多一档极轻 —— */
+  --shadow-soft: 0 1px 2px rgba(15, 23, 42, 0.04), 0 4px 12px rgba(37, 99, 235, 0.04);
+
+  /* —— Typography —— */
+  --font-sans: -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: ui-monospace, "JetBrains Mono", Consolas, "Cascadia Mono", monospace;
+
+  /* —— Motion —— */
+  --duration-fast: 120ms;
+  --duration-normal: 150ms;
+  --duration-slow: 200ms;
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+
+  /* —— Layout —— */
+  --titlebar-h: 40px;
+  --nav-w: 252px;
+  --nav-w-collapsed: 64px;
+  --console-h: 200px;
+  --content-max: 1120px;
+}
+
+.dark {
+  --bg-base: #0f172a; /* 带蓝的深底，非纯黑 */
+  --bg-elevated: #1e293b;
+  --bg-subtle: #162032;
+  --bg-console: #111b2e; /* 深色日志底，略亮于 base */
+  --border: #334155;
+  --border-strong: #475569;
+
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  --accent: #60a5fa;
+  --accent-hover: #93c5fd;
+  --accent-foreground: #0f172a;
+  --accent-soft: rgba(96, 165, 250, 0.22);
+
+  --success: #4ade80;
+  --success-soft: rgba(74, 222, 128, 0.14);
+  --warning: #fbbf24;
+  --warning-soft: rgba(251, 191, 36, 0.14);
+  --danger: #f87171;
+  --danger-soft: rgba(248, 113, 113, 0.14);
+
+  --shadow-soft: none; /* 深色用边框代替阴影 */
+}

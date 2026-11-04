@@ -1,0 +1,28 @@
+{
+  "appName": "轻采QS",
+  "version": "1.0.0",
+  "platform": "win32",
+  "chromiumPath": "",
+  "useSystemChrome": true,
+  "autoInstallPlaywrightChromium": true,
+  "server": {
+    "url": "http://127.0.0.1:3780",
+    "wsUrl": "ws://127.0.0.1:3780/ws",
+    "pollIntervalMs": 15000
+  },
+  "controlServer": {
+    "host": "127.0.0.1",
+    "port": 3780,
+    "jwtSecret": "qs-datacapture-dev-secret-change-me",
+    "users": [
+      { "username": "admin", "password": "admin123" }
+    ],
+    "latestVersion": {
+      "version": "1.0.0",
+      "downloadUrl": "",
+      "sha256": "",
+      "force": false,
+      "notes": "正式版 1.0.0"
+    }
+  }
+}

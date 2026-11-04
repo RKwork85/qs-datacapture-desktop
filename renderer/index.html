@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'"
+    />
+    <title>QS DataCapture</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="rail">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" width="22" height="22">
+              <path
+                fill="currentColor"
+                d="M6 8h8v4H10v8H6V8zm12 0h8v16h-4V12h-4V8zm-6 8h8v4h-4v4h-4v-8z"
+              />
+            </svg>
+          </div>
+          <div class="brand-copy">
+            <div class="brand-title">QS Capture</div>
+            <div class="brand-sub">数据采集工作台</div>
+          </div>
+        </div>
+
+        <nav class="nav" aria-label="业务导航">
+          <button class="nav-item active" data-panel="xhs" type="button">
+            <span class="nav-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 3l2.2 4.8L19 9l-3.5 3.2.9 5.1L12 14.8 7.6 17.3l.9-5.1L5 9l4.8-1.2L12 3z"/></svg>
+            </span>
+            <span class="nav-text">
+              <strong>小红书</strong>
+              <small>登录 · 采集 · 发布</small>
+            </span>
+          </button>
+          <button class="nav-item" data-panel="weibo" type="button">
+            <span class="nav-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M4 7h16v2H4V7zm2 4h12v2H6v-2zm3 4h6v2H9v-2z"/></svg>
+            </span>
+            <span class="nav-text">
+              <strong>微博</strong>
+              <small>热搜 · 详情 · 评论</small>
+            </span>
+          </button>
+          <button class="nav-item" data-panel="control" type="button">
+            <span class="nav-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M4 5h16v3H4V5zm0 5.5h16v3H4v-3zM4 16h10v3H4v-3z"/></svg>
+            </span>
+            <span class="nav-text">
+              <strong>控制服</strong>
+              <small>登录 · 任务 · 版本</small>
+            </span>
+          </button>
+        </nav>
+
+        <div class="rail-foot">
+          <div id="busyBadge" class="status-pill is-idle">空闲</div>
+          <div id="versionText" class="rail-meta">v0.1.0</div>
+        </div>
+      </aside>
+
+      <div class="workspace">
+        <div class="workspace-scroll">
+          <section id="panel-xhs" class="panel active">
+            <header class="hero">
+              <div>
+                <p class="eyebrow">Xiaohongshu</p>
+                <h1>小红书工作区</h1>
+                <p class="lede">登录态本地保存，采集与发布都在本机浏览器自动化完成。</p>
+              </div>
+              <div class="hero-chip">Playwright · Node</div>
+            </header>
+
+            <div class="tiles">
+              <article class="tile accent-rose">
+                <div class="tile-top">
+                  <h2>账号登录</h2>
+                  <span class="step">01</span>
+                </div>
+                <p class="hint">优先读取本地 Cookie；失效后自动打开扫码页。</p>
+                <button class="btn primary" data-action="xhs.login" type="button">开始登录</button>
+              </article>
+
+              <article class="tile">
+                <div class="tile-top">
+                  <h2>主页笔记采集</h2>
+                  <span class="step">02</span>
+                </div>
+                <label>主页链接</label>
+                <input id="xhsProfileUrl" type="text" placeholder="https://www.xiaohongshu.com/user/profile/..." />
+                <label>最多条数（0 = 全部）</label>
+                <input id="xhsMaxNotes" type="number" value="0" min="0" />
+                <button class="btn primary" data-action="xhs.fetch_profile" type="button">开始采集</button>
+              </article>
+
+              <article class="tile">
+                <div class="tile-top">
+                  <h2>媒体下载</h2>
+                  <span class="step">03</span>
+                </div>
+                <label>主页 CSV</label>
+                <div class="field-row">
+                  <input id="xhsCsvPath" type="text" placeholder="选择 xhs_profile_notes_*.csv" />
+                  <button type="button" class="btn ghost" data-pick="xhsCsv">选择</button>
+                </div>
+                <div class="field-grid two">
+                  <div>
+                    <label>类型</label>
+                    <select id="xhsNoteType">
+                      <option value="all">全部</option>
+                      <option value="image">仅图文</option>
+                      <option value="video">仅视频</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label>篇数上限</label>
+                    <input id="xhsMediaMax" type="number" value="20" min="1" max="20" />
+                  </div>
+                </div>
+                <button class="btn primary" data-action="xhs.fetch_media" type="button">开始下载</button>
+              </article>
+
+              <article class="tile">
+                <div class="tile-top">
+                  <h2>发布图文</h2>
+                  <span class="step">04</span>
+                </div>
+                <label>图片目录</label>
+                <div class="field-row">
+                  <input id="xhsImageDir" type="text" />
+                  <button type="button" class="btn ghost" data-pick="xhsImageDir">选择</button>
+                </div>
+                <label>标题</label>
+                <input id="xhsNoteTitle" type="text" maxlength="20" />
+                <label>正文</label>
+                <textarea id="xhsNoteContent" rows="3"></textarea>
+                <label>话题</label>
+                <input id="xhsNoteTags" type="text" placeholder="#话题A #话题B" />
+                <label class="check"><input id="xhsNoteSchedule" type="checkbox" /> 定时发布</label>
+                <button class="btn primary" data-action="xhs.publish_note" type="button">发布图文</button>
+              </article>
+
+              <article class="tile">
+                <div class="tile-top">
+                  <h2>发布视频</h2>
+                  <span class="step">05</span>
+                </div>
+                <label>视频文件</label>
+                <div class="field-row">
+                  <input id="xhsVideoPath" type="text" />
+                  <button type="button" class="btn ghost" data-pick="xhsVideo">选择</button>
+                </div>
+                <label>标题</label>
+                <input id="xhsVideoTitle" type="text" maxlength="20" />
+                <label>正文</label>
+                <textarea id="xhsVideoContent" rows="3"></textarea>
+                <label>话题</label>
+                <input id="xhsVideoTags" type="text" />
+                <label class="check"><input id="xhsVideoSchedule" type="checkbox" /> 定时发布</label>
+                <button class="btn primary" data-action="xhs.publish_video" type="button">发布视频</button>
+              </article>
+            </div>
+          </section>
+
+          <section id="panel-weibo" class="panel">
+            <header class="hero">
+              <div>
+                <p class="eyebrow">Weibo Trends</p>
+                <h1>微博工作区</h1>
+                <p class="lede">热搜流水线：榜单 → 话题详情 → 评论区 → Excel 汇总。</p>
+              </div>
+              <div class="hero-chip tone-orange">HTTP 优先</div>
+            </header>
+
+            <div class="tiles">
+              <article class="tile accent-orange">
+                <div class="tile-top">
+                  <h2>账号登录</h2>
+                  <span class="step">01</span>
+                </div>
+                <p class="hint">登录态写入 auth/weibo_auth.json</p>
+                <label class="check"><input id="weiboForceLogin" type="checkbox" /> 强制重新登录</label>
+                <button class="btn primary" data-action="weibo.login" type="button">微博登录</button>
+              </article>
+
+              <article class="tile">
+                <div class="tile-top">
+                  <h2>热搜榜</h2>
+                  <span class="step">02</span>
+                </div>
+                <label>实时条数</label>
+                <input id="weiboHotLimit" type="number" value="50" min="1" max="50" />
+                <button class="btn primary" data-action="weibo.hot" type="button">抓取热搜 CSV</button>
+              </article>
+
+              <article class="tile wide">
+                <div class="tile-top">
+                  <h2>日常流水线</h2>
+                  <span class="step">03</span>
+                </div>
+                <div class="field-grid three">
+                  <div>
+                    <label>每话题热门微博</label>
+                    <input id="weiboDailyHotLimit" type="number" value="10" min="1" />
+                  </div>
+                  <div>
+                    <label>最多话题（0=全部）</label>
+                    <input id="weiboMaxTopics" type="number" value="3" min="0" />
+                  </div>
+                  <div>
+                    <label>评论区帖数/话题</label>
+                    <input id="weiboCommentPosts" type="number" value="3" min="0" />
+                  </div>
+                  <div>
+                    <label>每帖热评 Top</label>
+                    <input id="weiboCommentTop" type="number" value="100" min="1" />
+                  </div>
+                  <div>
+                    <label>并发 workers</label>
+                    <input id="weiboWorkers" type="number" value="2" min="1" max="4" />
+                  </div>
+                  <div class="align-end">
+                    <label class="check"><input id="weiboSkipComment" type="checkbox" /> 跳过评论区</label>
+                  </div>
+                </div>
+                <button class="btn primary" data-action="weibo.daily" type="button">跑日常流水线</button>
+              </article>
+            </div>
+          </section>
+
+          <section id="panel-control" class="panel">
+            <header class="hero">
+              <div>
+                <p class="eyebrow">Control Plane</p>
+                <h1>控制服</h1>
+                <p class="lede">账密鉴权、版本检查、任务下发；桌面端轮询 + WebSocket 双通道。</p>
+              </div>
+              <div class="hero-chip tone-blue">HTTP + WS</div>
+            </header>
+
+            <div class="tiles">
+              <article class="tile accent-blue">
+                <div class="tile-top">
+                  <h2>控制服登录</h2>
+                  <span class="step">01</span>
+                </div>
+                <label>账号</label>
+                <input id="ctrlUser" type="text" value="admin" />
+                <label>密码</label>
+                <input id="ctrlPass" type="password" value="admin123" />
+                <div class="field-row wrap">
+                  <button class="btn primary" data-action="control.login" type="button">登录</button>
+                  <button type="button" class="btn ghost" data-action="control.connectWs">重连 WS</button>
+                  <button type="button" class="btn ghost" data-action="control.poll">立即拉取</button>
+                </div>
+                <p id="ctrlStatus" class="hint">未登录</p>
+              </article>
+
+              <article class="tile">
+                <div class="tile-top">
+                  <h2>创建远程任务</h2>
+                  <span class="step">02</span>
+                </div>
+                <label>任务类型</label>
+                <select id="ctrlTaskType">
+                  <option value="weibo.hot">weibo.hot</option>
+                  <option value="weibo.daily">weibo.daily</option>
+                  <option value="xhs.login">xhs.login</option>
+                  <option value="weibo.login">weibo.login</option>
+                </select>
+                <label>params JSON</label>
+                <textarea id="ctrlTaskParams" rows="5">{
+  "maxTopics": 2,
+  "skipCommentZone": true
+}</textarea>
+                <button class="btn primary" data-action="control.createTask" type="button">创建任务</button>
+              </article>
+            </div>
+          </section>
+        </div>
+
+        <section class="console" aria-label="运行日志">
+          <div class="console-bar">
+            <div class="console-title">
+              <span class="dot"></span>
+              运行日志
+            </div>
+            <button type="button" class="btn ghost tiny" id="clearLog">清空</button>
+          </div>
+          <pre id="logView"></pre>
+        </section>
+      </div>
+    </div>
+    <script src="./app.js"></script>
+  </body>
+</html>

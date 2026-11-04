@@ -1,0 +1,82 @@
+{
+  "name": "qs-datacapture-desktop",
+  "version": "1.0.0",
+  "description": "无广告，免登录，采数据，更轻松！",
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "main": "electron/main.js",
+  "private": true,
+  "scripts": {
+    "ui:dev": "npm --prefix ui run dev",
+    "ui:build": "npm --prefix ui run build",
+    "start": "node .vendor/node_modules/electron/cli.js .",
+    "start:ui": "npm run ui:build && npm start",
+    "start:dev": "cross-env QS_UI_DEV=1 npm start",
+    "dev:ui": "concurrently -k \"npm run ui:dev\" \"wait-on http://127.0.0.1:5173 && npm run start:dev\"",
+    "server": "node server/index.js",
+    "dev": "concurrently -k \"npm run server\" \"npm run ui:dev\" \"wait-on http://127.0.0.1:5173 && npm run start:dev\"",
+    "dev:prod": "concurrently -k \"npm run server\" \"npm run start:ui\"",
+    "playwright:install": "playwright install chromium",
+    "electron:reinstall": "npm install electron@33.4.11 --prefix .vendor --no-save",
+    "obfuscate": "node scripts/obfuscate-for-dist.js",
+    "dist": "node scripts/dist-win.js",
+    "dist:plain": "cross-env QS_OBFUSCATE=0 node scripts/dist-win.js"
+  },
+  "build": {
+    "appId": "com.muzi_hhh.qs-datacapture",
+    "productName": "轻采QS",
+    "electronVersion": "33.4.11",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "electron/**/*",
+      "core/**/*",
+      "server/**/*",
+      "ui/dist/**/*",
+      "config/**/*",
+      "build/icon.ico",
+      "LICENSE",
+      "package.json"
+    ],
+    "extraResources": [],
+    "asarUnpack": [
+      "**/node_modules/playwright/**",
+      "**/node_modules/playwright-core/**"
+    ],
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "shortcutName": "轻采QS",
+      "uninstallDisplayName": "轻采QS",
+      "include": "build/installer.nsh",
+      "warningsAsErrors": false
+    }
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "exceljs": "^4.4.0",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "playwright": "^1.49.1",
+    "uuid": "^11.0.3",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "cross-env": "^10.1.0",
+    "electron": "^33.4.11",
+    "electron-builder": "^26.18.0",
+    "javascript-obfuscator": "^4.2.2",
+    "wait-on": "^9.5.1"
+  }
+}

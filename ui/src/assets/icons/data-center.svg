@@ -1,0 +1,21 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="topGrad" x1="10" y1="10" x2="38" y2="20" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#22D3EE" />
+      <stop offset="100%" stop-color="#06B6D4" />
+    </linearGradient>
+    <linearGradient id="leftGrad" x1="10" y1="20" x2="24" y2="38" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#3B82F6" />
+      <stop offset="100%" stop-color="#2563EB" />
+    </linearGradient>
+    <linearGradient id="rightGrad" x1="24" y1="20" x2="38" y2="38" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#8B5CF6" />
+      <stop offset="100%" stop-color="#6D28D9" />
+    </linearGradient>
+  </defs>
+  <path d="M24 6L40 14L24 22L8 14L24 6Z" fill="url(#topGrad)" />
+  <path d="M8 14V32L24 40V22L8 14Z" fill="url(#leftGrad)" />
+  <path d="M40 14V32L24 40V22L40 14Z" fill="url(#rightGrad)" />
+  <path d="M24 22V34M16 18V30L24 34M32 18V30L24 34" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+  <circle cx="24" cy="34" r="2.5" fill="#FFFFFF" />
+</svg>
